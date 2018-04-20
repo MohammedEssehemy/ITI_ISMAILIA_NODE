@@ -26,7 +26,7 @@ userSchema.methods.toJSON = function() {
 }
 
 // userSchema.pre('save',function (next) {
-//   return bcrypt.hash(password, 7).then(function(hash) {
+//   bcrypt.hash(password, 7).then(function(hash) {
 //     this.password = hash;
 //     debugger;
 //     next()
