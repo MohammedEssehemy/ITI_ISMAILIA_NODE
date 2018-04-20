@@ -1,21 +1,20 @@
-var express = require('express');
-var path = require('path');
-// var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const express = require('express');
+const path = require('path');
+const morgan = require('morgan');
 require('./startup/dbInitialize');
 
-var indexRouter = require('./routes/index');
-var apiRouter = require('./routes/apis');
+const apiRouter = require('./routes/apis');
 
-var app = express();
+const app = express();
 
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-// app.use(cookieParser());
+app.use(morgan('dev'));
 app.use(express.static(path.join(__dirname, 'public')));
 
-// app.use('/', indexRouter);
 app.use('/api', apiRouter);
+
+app.use((err,req,res,next)=>{
+  console.log(err);
+  res.status(500).json({message: err.message});
+})
 
 module.exports = app;

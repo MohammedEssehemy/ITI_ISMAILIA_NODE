@@ -1,0 +1,6 @@
+{
+  "jwt": {
+    "ttl": 86400,
+    "secret": "MYSECRET"
+  }
+}
