@@ -11,14 +11,14 @@ router
 .route('/')
 .get(async (req,res,next)=>{
   let notes = await Note.find({userId: req.user.id});
-  res.json({success: true, notes});
+  res.json(notes);
 })
 .post(async (req,res,next)=>{
   const {title,body} = req.body;
   try{
     debugger;
     let note = await Note.create({title,body,userId: req.user.id});
-    res.json({success: true, note})
+    res.json(note)
   } catch (err){
     next(err);
   }

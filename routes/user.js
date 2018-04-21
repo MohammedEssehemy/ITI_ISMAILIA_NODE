@@ -21,6 +21,20 @@ router
     return res.status(400).json({success:false, message: 'wrong password'});
   }
 });
+
+
+router.post('/',(req,res,next)=>{
+  let userObj = User.create(req.body,function (err, user) {
+    if(err){
+      return next(err);
+    }
+    user.generateToken().then(token=>{
+      res.json({...user,token});
+    });
+  });
+});
+
+
 router.use(isAuthenticated);
 
 router
@@ -52,16 +66,7 @@ router
     if(err) return next(err);
     res.json(users);
   });
-})
-.post((req,res,next)=>{
-  let userObj = User.create(req.body,function (err, user) {
-    if(err){
-      return next(err);
-    }
-    res.json(user);
-  });
 });
-
 
 
 

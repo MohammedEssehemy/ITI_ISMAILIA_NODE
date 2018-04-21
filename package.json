@@ -3,11 +3,13 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "deployHeroku": "cd frontend && ng build --prod --env=prod && cd ./../ && git add . && git commit -m 'deploy On Heroku' && git push && git push heroku master"
   },
   "dependencies": {
     "bcrypt": "^2.0.0",
     "cookie-parser": "~1.4.3",
+    "cors": "^2.8.4",
     "debug": "~2.6.9",
     "express": "~4.16.0",
     "jsonwebtoken": "^8.2.1",
